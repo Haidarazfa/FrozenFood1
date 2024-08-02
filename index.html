@@ -263,16 +263,16 @@
                 Subtotal: Rp 0
             </div>
 
-            <div class="form-group">
-                <label for="customer-name">Nama Pembeli:</label>
-                <input type="text" id="customer-name" required>
-            </div>
-            <div class="form-group">
-                <label for="customer-address">Alamat Pembeli:</label>
-                <input type="text" id="customer-address" required>
-            </div>
+<div class="form-group">
+    <label for="customer-name">Nama Pembeli:</label>
+    <input type="text" id="customer-name" required>
+</div>
+<div class="form-group">
+    <label for="customer-address">Alamat Pembeli:</label>
+    <input type="text" id="customer-address" required>
+</div>
+<button class="cart-button" onclick="proceedToCheckout()">Lanjutkan ke WhatsApp</button>
 
-            <button class="cart-button" onclick="proceedToCheckout()">Lanjutkan ke WhatsApp</button>
         </div>
     </div>
 
@@ -493,8 +493,8 @@
         }
 
 function proceedToCheckout() {
-    const customerName = document.getElementById('buyer-name').value;
-    const customerAddress = document.getElementById('buyer-address').value;
+    const customerName = document.getElementById('customer-name').value;
+    const customerAddress = document.getElementById('customer-address').value;
 
     if (!customerName || !customerAddress) {
         alert('Harap isi nama dan alamat Anda');
