@@ -492,22 +492,22 @@
             }
         }
 
-        function proceedToCheckout() {
-            const customerName = document.getElementById('customer-name').value;
-            const customerAddress = document.getElementById('customer-address').value;
+function proceedToCheckout() {
+    const customerName = document.getElementById('customer-name').value;
+    const customerAddress = document.getElementById('customer-address').value;
 
-            if (!customerName || !customerAddress) {
-                alert('Silakan isi nama dan alamat pembeli.');
-                return;
-            }
+    if (!customerName || !customerAddress) {
+        alert('Silakan isi nama dan alamat pembeli.');
+        return;
+    }
 
-            let message = `Pesanan dari ${customerName}%0AAlamat: ${customerAddress}%0A%0A`;
-            cart.forEach(item => {
-                message += `${item.name} - ${item.quantity} pcs - Rp ${item.totalPrice.toLocaleString()}%0A`;
-            });
-            const whatsappLink = `https://wa.me/62895322496220?text=${encodeURIComponent(message)}`;
-            window.open(whatsappLink, '_blank');
-        }
+    let message = `Pesanan dari ${customerName}\nAlamat: ${customerAddress}\n\n`;
+    cart.forEach(item => {
+        message += `${item.name} - ${item.quantity} pcs - Rp ${item.totalPrice.toLocaleString()}\n`;
+    });
+    const whatsappLink = `https://wa.me/62895322496220?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, '_blank');
+}
     </script>
 </body>
 </html>
