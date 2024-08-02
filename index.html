@@ -264,19 +264,21 @@
             </div>
 
             <div class="form-group">
-                <label for="buyer-name">Nama:</label>
-                <input type="text" id="buyer-name" placeholder="Masukkan nama Anda">
+                <label for="customer-name">Nama Pembeli:</label>
+                <input type="text" id="customer-name" required>
             </div>
             <div class="form-group">
-                <label for="buyer-address">Alamat:</label>
-                <input type="text" id="buyer-address" placeholder="Masukkan alamat Anda">
+                <label for="customer-address">Alamat Pembeli:</label>
+                <input type="text" id="customer-address" required>
             </div>
 
-            <button class="cart-button" onclick="proceedToCheckout()">Proses Checkout via WhatsApp</button>
+            <button class="cart-button" onclick="proceedToCheckout()">Lanjutkan ke WhatsApp</button>
         </div>
     </div>
 
     <script>
+        let cart = [];
+
         const products = {
             "Ayoma": [
                 { name: "Ayoma Rolade Ayam", price: 21000 },
@@ -421,48 +423,48 @@
             ]
         };
 
-        const cart = [];
-
         function showModal(brand) {
-            const modal = document.getElementById('product-modal');
-            const brandTitle = document.getElementById('brand-title');
-            const productTableBody = document.querySelector('#product-table tbody');
-            brandTitle.textContent = brand;
+            document.getElementById('brand-title').textContent = brand;
+            const productTableBody = document.getElementById('product-table').getElementsByTagName('tbody')[0];
             productTableBody.innerHTML = '';
 
-            if (products[brand]) {
-                products[brand].forEach(product => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.name}</td>
-                        <td>Rp ${product.price.toLocaleString()}</td>
-                        <td><button onclick="addToCart('${brand}', '${product.name}', ${product.price})">Tambah</button></td>
-                    `;
-                    productTableBody.appendChild(row);
-                });
-            }
+            products[brand].forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>Rp ${product.price.toLocaleString()}</td>
+                    <td><button onclick="addToCart('${brand}', '${product.name}', ${product.price})">Tambah</button></td>
+                `;
+                productTableBody.appendChild(row);
+            });
 
-            modal.style.display = 'block';
+            document.getElementById('product-modal').style.display = 'block';
         }
 
         function closeModal() {
-            const modal = document.getElementById('product-modal');
-            modal.style.display = 'none';
+            document.getElementById('product-modal').style.display = 'none';
         }
 
-        function addToCart(brand, productName, price) {
-            const existingProductIndex = cart.findIndex(item => item.name === productName);
-            if (existingProductIndex > -1) {
-                cart[existingProductIndex].quantity++;
-                cart[existingProductIndex].totalPrice += price;
+        function addToCart(brand, name, price) {
+            const existingProduct = cart.find(item => item.name === name);
+            if (existingProduct) {
+                existingProduct.quantity++;
+                existingProduct.totalPrice += price;
             } else {
-                cart.push({
-                    brand,
-                    name: productName,
-                    price,
-                    quantity: 1,
-                    totalPrice: price
-                });
+                cart.push({ brand, name, price, quantity: 1, totalPrice: price });
+            }
+            updateCart();
+        }
+
+        function removeFromCart(name) {
+            const productIndex = cart.findIndex(item => item.name === name);
+            if (productIndex > -1) {
+                cart[productIndex].quantity--;
+                cart[productIndex].totalPrice -= cart[productIndex].price;
+
+                if (cart[productIndex].quantity === 0) {
+                    cart.splice(productIndex, 1);
+                }
             }
             updateCart();
         }
@@ -470,56 +472,40 @@
         function updateCart() {
             const cartBody = document.getElementById('cart-body');
             cartBody.innerHTML = '';
-            let subtotal = 0;
 
             if (cart.length === 0) {
                 cartBody.innerHTML = '<tr class="empty-cart"><td colspan="4">Keranjang Anda kosong</td></tr>';
             } else {
-                cart.forEach((item, index) => {
+                let subtotal = 0;
+                cart.forEach(item => {
                     subtotal += item.totalPrice;
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${item.name}</td>
                         <td>${item.quantity}</td>
                         <td>Rp ${item.totalPrice.toLocaleString()}</td>
-                        <td><button onclick="removeFromCart(${index})">Hapus</button></td>
+                        <td><button onclick="removeFromCart('${item.name}')">Hapus</button></td>
                     `;
                     cartBody.appendChild(row);
                 });
+                document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
             }
-
-            document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
-        }
-
-        function removeFromCart(index) {
-            const item = cart[index];
-            if (item.quantity > 1) {
-                item.quantity--;
-                item.totalPrice -= item.price;
-            } else {
-                cart.splice(index, 1);
-            }
-            updateCart();
         }
 
         function proceedToCheckout() {
-            const buyerName = document.getElementById('buyer-name').value;
-            const buyerAddress = document.getElementById('buyer-address').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerAddress = document.getElementById('customer-address').value;
 
-            if (!buyerName || !buyerAddress) {
-                alert('Harap isi nama dan alamat Anda');
+            if (!customerName || !customerAddress) {
+                alert('Silakan isi nama dan alamat pembeli.');
                 return;
             }
 
-            let message = `Halo, saya ingin memesan produk berikut:\n\n`;
+            let message = `Pesanan dari ${customerName}%0AAlamat: ${customerAddress}%0A%0A`;
             cart.forEach(item => {
-                message += `${item.name} - ${item.quantity} pcs - Rp ${item.totalPrice.toLocaleString()}\n`;
+                message += `${item.name} - ${item.quantity} pcs - Rp ${item.totalPrice.toLocaleString()}%0A`;
             });
-            message += `\nSubtotal: Rp ${cart.reduce((total, item) => total + item.totalPrice, 0).toLocaleString()}`;
-            message += `\n\nNama: ${buyerName}`;
-            message += `\nAlamat: ${buyerAddress}`;
-
-            const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const whatsappLink = `https://wa.me/62895322496220?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
         }
     </script>
