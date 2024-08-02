@@ -493,18 +493,24 @@
         }
 
 function proceedToCheckout() {
-    const customerName = document.getElementById('customer-name').value;
-    const customerAddress = document.getElementById('customer-address').value;
+    const customerName = document.getElementById('buyer-name').value;
+    const customerAddress = document.getElementById('buyer-address').value;
 
     if (!customerName || !customerAddress) {
-        alert('Silakan isi nama dan alamat pembeli.');
+        alert('Harap isi nama dan alamat Anda');
         return;
     }
 
     let message = `Pesanan dari ${customerName}\nAlamat: ${customerAddress}\n\n`;
+    let subtotal = 0;
+    
     cart.forEach(item => {
         message += `${item.name} - ${item.quantity} pcs - Rp ${item.totalPrice.toLocaleString()}\n`;
+        subtotal += item.totalPrice;
     });
+    
+    message += `\nSubtotal: Rp ${subtotal.toLocaleString()}`;
+
     const whatsappLink = `https://wa.me/62895322496220?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, '_blank');
 }
