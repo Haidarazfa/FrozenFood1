@@ -500,35 +500,40 @@
             }
         }
 
-        function updateCart() {
-            const cartBody = document.getElementById('cart-body');
-            cartBody.innerHTML = '';
-            let subtotal = 0;
+function updateCart() {
+    const cartBody = document.getElementById('cart-body');
+    cartBody.innerHTML = '';
+    let subtotal = 0;
 
-            if (cart.length === 0) {
-                const row = cartBody.insertRow();
-                const emptyCell = row.insertCell(0);
-                emptyCell.colSpan = 4;
-                emptyCell.className = 'empty-cart';
-                emptyCell.textContent = 'Keranjang belanja kosong';
-            } else {
-                cart.forEach(item => {
-                    const row = cartBody.insertRow();
-                    row.insertCell(0).textContent = item.product.name;
-                    row.insertCell(1).textContent = item.quantity;
-                    row.insertCell(2).textContent = `Rp ${item.product.price.toLocaleString()}`;
-                    const removeButton = document.createElement('button');
-                    removeButton.textContent = 'Kurangi';
-                    removeButton.onclick = () => removeFromCart(item.product.name);
-                    row.insertCell(3).appendChild(removeButton);
+    if (cart.length === 0) {
+        const row = cartBody.insertRow();
+        const emptyCell = row.insertCell(0);
+        emptyCell.colSpan = 4;
+        emptyCell.className = 'empty-cart';
+        emptyCell.textContent = 'Keranjang belanja kosong';
+    } else {
+        cart.forEach(item => {
+            const row = cartBody.insertRow();
+            row.insertCell(0).textContent = item.product.name;
+            row.insertCell(1).textContent = item.quantity;
 
-                    subtotal += item.product.price * item.quantity;
-                });
-            }
+            // Hitung harga total untuk item ini
+            const itemTotalPrice = item.product.price * item.quantity;
+            row.insertCell(2).textContent = `Rp ${itemTotalPrice.toLocaleString()}`;
 
-            document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
-        }
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Kurangi';
+            removeButton.onclick = () => removeFromCart(item.product.name);
+            row.insertCell(3).appendChild(removeButton);
 
+            // Tambahkan harga item ke subtotal
+            subtotal += itemTotalPrice;
+        });
+    }
+
+    document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
+}
+        
         function checkout() {
             const name = document.getElementById('name').value;
             const address = document.getElementById('address').value;
