@@ -267,15 +267,16 @@
                 <input type="text" id="customer-name" required>
             </div>
             <div class="form-group">
-                <label for="customer-phone">Nomor Telepon:</label>
-                <input type="tel" id="customer-phone" required>
+                <label for="customer-address">Alamat Pembeli:</label>
+                <input type="text" id="customer-address" required>
             </div>
-            <button class="cart-button" onclick="placeOrder()">Pesan</button>
+
+            <button class="cart-button" onclick="checkout()">Proses Pesanan</button>
         </div>
     </div>
 
     <script>
-        const productData = {
+        const products = {
             "Ayoma": [
                 { name: "Ayoma Rolade Ayam", price: 21000 },
                 { name: "Ayoma Rolade api", price: 22000 }
@@ -419,29 +420,24 @@
             ]
         };
 
-        let cart = [];
+        const cart = [];
 
         function showModal(brand) {
             const modal = document.getElementById('product-modal');
             const title = document.getElementById('brand-title');
             const tableBody = document.getElementById('product-table').getElementsByTagName('tbody')[0];
 
-            // Clear existing rows
+            title.textContent = brand;
             tableBody.innerHTML = '';
 
-            // Set brand title
-            title.textContent = brand;
-
-            // Populate table with products
-            productData[brand].forEach(product => {
+            products[brand].forEach((product, index) => {
                 const row = tableBody.insertRow();
-                row.insertCell(0).textContent = product.name;
-                row.insertCell(1).textContent = `Rp ${product.price.toLocaleString()}`;
-                const actionCell = row.insertCell(2);
+                row.insertCell().textContent = product.name;
+                row.insertCell().textContent = `Rp ${product.price.toLocaleString()}`;
                 const addButton = document.createElement('button');
-                addButton.textContent = 'Tambah';
-                addButton.onclick = () => addToCart(product);
-                actionCell.appendChild(addButton);
+                addButton.textContent = 'Tambah ke Keranjang';
+                addButton.onclick = () => addToCart(product, brand);
+                row.insertCell().appendChild(addButton);
             });
 
             modal.style.display = 'block';
@@ -451,49 +447,43 @@
             document.getElementById('product-modal').style.display = 'none';
         }
 
-        function addToCart(product) {
-            const existingItemIndex = cart.findIndex(item => item.name === product.name);
-            if (existingItemIndex > -1) {
-                cart[existingItemIndex].quantity += 1;
+        function addToCart(product, brand) {
+            const existingProduct = cart.find(item => item.product.name === product.name);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                cart.push({ product, quantity: 1, brand });
             }
             updateCart();
         }
 
         function updateCart() {
             const cartBody = document.getElementById('cart-body');
-            const subtotal = document.getElementById('subtotal');
             cartBody.innerHTML = '';
 
             if (cart.length === 0) {
-                cartBody.innerHTML = '<tr class="empty-cart"><td colspan="4">Keranjang Anda kosong</td></tr>';
-                subtotal.textContent = 'Subtotal: Rp 0';
-                return;
+                const row = cartBody.insertRow();
+                row.classList.add('empty-cart');
+                row.insertCell().colSpan = 4;
+                row.insertCell().textContent = 'Keranjang Anda kosong';
+            } else {
+                cart.forEach(item => {
+                    const row = cartBody.insertRow();
+                    row.insertCell().textContent = item.product.name;
+                    row.insertCell().textContent = item.quantity;
+                    row.insertCell().textContent = `Rp ${(item.product.price * item.quantity).toLocaleString()}`;
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Hapus';
+                    removeButton.onclick = () => removeFromCart(item.product.name);
+                    row.insertCell().appendChild(removeButton);
+                });
             }
 
-            let total = 0;
-
-            cart.forEach(item => {
-                const row = cartBody.insertRow();
-                row.insertCell(0).textContent = item.name;
-                row.insertCell(1).textContent = item.quantity;
-                const totalPrice = item.price * item.quantity;
-                row.insertCell(2).textContent = `Rp ${totalPrice.toLocaleString()}`;
-                const actionCell = row.insertCell(3);
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'Hapus';
-                removeButton.onclick = () => removeFromCart(item);
-                actionCell.appendChild(removeButton);
-
-                total += totalPrice;
-            });
-
-            subtotal.textContent = `Subtotal: Rp ${total.toLocaleString()}`;
+            updateSubtotal();
         }
 
-        function removeFromCart(item) {
-            const index = cart.findIndex(cartItem => cartItem.name === item.name);
+        function removeFromCart(productName) {
+            const index = cart.findIndex(item => item.product.name === productName);
             if (index > -1) {
                 if (cart[index].quantity > 1) {
                     cart[index].quantity -= 1;
@@ -504,24 +494,30 @@
             }
         }
 
-        function placeOrder() {
-            const name = document.getElementById('customer-name').value;
-            const phone = document.getElementById('customer-phone').value;
-
-            if (name && phone && cart.length > 0) {
-                alert(`Pesanan Anda telah diterima!\nNama: ${name}\nNomor Telepon: ${phone}\nSubtotal: ${document.getElementById('subtotal').textContent}`);
-                cart = [];
-                updateCart();
-                document.getElementById('customer-name').value = '';
-                document.getElementById('customer-phone').value = '';
-            } else {
-                alert('Silakan lengkapi informasi pembeli dan pastikan keranjang Anda tidak kosong.');
-            }
+        function updateSubtotal() {
+            const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+            document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
         }
 
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('product-modal')) {
-                closeModal();
+        function checkout() {
+            const name = document.getElementById('customer-name').value;
+            const address = document.getElementById('customer-address').value;
+
+            if (name && address) {
+                const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+                const productsList = cart.map((item, index) => `${index + 1}. ${item.product.name} (x${item.quantity})`).join('\n');
+                const message = `Nama: ${name}\nAlamat: ${address}\nList Pesanan:\n${productsList}\n\nSubtotal: Rp ${subtotal.toLocaleString()}`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/62895322496220?text=${encodedMessage}`;
+                window.location.href = whatsappUrl;
+
+                cart.length = 0; // Clear cart
+                updateCart();
+                document.getElementById('customer-name').value = '';
+                document.getElementById('customer-address').value = '';
+            } else {
+                alert('Mohon lengkapi semua informasi!');
             }
         }
     </script>
