@@ -491,6 +491,7 @@
                 } else {
                     cart.splice(index, 1);
                 }
+                }
                 updateCart();
                 showPopup('removePopup');
             }
@@ -499,42 +500,42 @@
         function updateCart() {
             const cartBody = document.getElementById('cart-body');
             cartBody.innerHTML = '';
+            let subtotal = 0;
 
-            if (cart.length === 0) {
+            cart.forEach(item => {
                 const row = cartBody.insertRow();
-                row.classList.add('empty-cart');
-                const emptyCell = row.insertCell(0);
-                emptyCell.colSpan = 4;
-                emptyCell.textContent = 'Keranjang Anda kosong';
-            } else {
-                cart.forEach(item => {
-                    const row = cartBody.insertRow();
-                    row.insertCell(0).textContent = item.product.name;
-                    row.insertCell(1).textContent = item.quantity;
-                    row.insertCell(2).textContent = `Rp ${(item.product.price * item.quantity).toLocaleString()}`;
-                    const removeButton = document.createElement('button');
-                    removeButton.textContent = 'Hapus';
-                    removeButton.onclick = () => removeFromCart(item.product.name);
-                    row.insertCell(3).appendChild(removeButton);
-                });
-            }
+                row.insertCell(0).textContent = item.product.name;
+                row.insertCell(1).textContent = item.quantity;
+                row.insertCell(2).textContent = `Rp ${item.product.price.toLocaleString()}`;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Kurangi';
+                removeButton.onclick = () => removeFromCart(item.product.name);
+                row.insertCell(3).appendChild(removeButton);
 
-            updateSubtotal();
-        }
+                subtotal += item.product.price * item.quantity;
+            });
 
-        function updateSubtotal() {
-            const subtotalElement = document.getElementById('subtotal');
-            const subtotal = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
-            subtotalElement.textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
+            document.getElementById('subtotal').textContent = `Subtotal: Rp ${subtotal.toLocaleString()}`;
         }
 
         function checkout() {
             const name = document.getElementById('name').value;
             const address = document.getElementById('address').value;
-            const subtotal = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
-            const cartDetails = cart.map(item => `${item.product.name} (Jumlah: ${item.quantity})`).join(', ');
-            const message = `Halo, saya ingin memesan: ${cartDetails}. Subtotal: Rp ${subtotal.toLocaleString()}. Nama: ${name}. Alamat: ${address}`;
-            const whatsappUrl = `https://wa.me/62895322496220?text=${encodeURIComponent(message)}`;
+
+            if (name === '' || address === '') {
+                alert('Nama dan alamat harus diisi!');
+                return;
+            }
+
+            let orderDetails = `Nama: ${name}\nAlamat: ${address}\nPesanan:\n`;
+            cart.forEach((item, index) => {
+                orderDetails += `${index + 1}. ${item.product.name} - ${item.quantity} - Rp ${item.product.price.toLocaleString()}\n`;
+            });
+
+            const subtotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+            orderDetails += `Subtotal: Rp ${subtotal.toLocaleString()}`;
+
+            const whatsappUrl = `https://wa.me/62895322496220?text=${encodeURIComponent(orderDetails)}`;
             window.open(whatsappUrl, '_blank');
         }
     </script>
