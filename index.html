@@ -8,6 +8,82 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Barokah Frozen Food</h1>
+    </header>
+    
+    <div class="container">
+        <div class="brand-list">
+            <button onclick="showModal('Ayoma')">Ayoma</button>
+            <button onclick="showModal('Bartos')">Bartos</button>
+        </div>
+
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="brand-title"></h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="product-list">
+                    <table id="product-table">
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>Keranjang</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <tr>
+                        <td colspan="4" class="empty-cart">Keranjang belanja kosong</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtotal" id="subtotal">Subtotal: Rp 0</div>
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="text" id="name" placeholder="Masukkan Nama">
+            </div>
+            <div class="form-group">
+                <label for="address">Alamat</label>
+                <input type="text" id="address" placeholder="Masukkan Alamat">
+            </div>
+            <button class="cart-button" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div id="tutorial-modal" class="modal" style="display: block;">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Selamat Datang di Barokah Frozen Food</h2>
+                <span class="close" onclick="closeTutorial()">&times;</span>
+            </div>
+            <div class="tutorial-content" style="padding: 20px;">
+            </div>
+            <button style="margin: 20px auto; display: block;" onclick="closeTutorial()">Mengerti, mulai belanja!</button>
+        </div>
+    </div>
+
+    <div id="addPopup" class="popup">Produk ditambahkan ke keranjang</div>
+    <div id="removePopup" class="popup remove">Produk dihapus dari keranjang</div>
+
     <script src="script.js"></script>
 </body>
 </html>
