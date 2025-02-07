@@ -58,24 +58,26 @@
             </div>
         </section>
 
-        <div id="productModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="modalTitle"></h2>
-                    <span class="close" onclick="closeModal()">&times;</span>
-                </div>
-                <table class="product-table">
-                    <thead>
-                        <tr>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="productList"></tbody>
-                </table>
-            </div>
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+            <span class="close" onclick="closeModal()">&times;</span>
         </div>
+        <div class="modal-body">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Produk</th>
+                        <th>Harga</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="productList"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
         <section class="cart-section">
             <div class="cart-header">
