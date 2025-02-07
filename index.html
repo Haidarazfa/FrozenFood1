@@ -4,44 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barokah Frozen Food</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
+    <header>
         <div class="header-content">
-            <h1><i class="fas fa-snowflake"></i> Barokah Frozen</h1>
-            <div class="cart-info">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count">0</span>
+            <h1>🍥 Barokah Frozen</h1>
+            <div class="cart-indicator">
+                <span id="cartCount">0</span>
+                <i class="cart-icon">🛒</i>
             </div>
         </div>
     </header>
 
     <main class="container">
         <section class="brand-section">
-            <h2 class="section-title">Pilih Merek</h2>
+            <h2>Pilih Merek Produk</h2>
             <div class="brand-grid">
+                <button onclick="showModal('Ayoma')">Ayoma</button>
+                <button onclick="showModal('Bartos')">Bartos</button>
+                <button onclick="showModal('Bernardi')">Bernardi</button>
+                <button onclick="showModal('Bomboe')">Bomboe</button>
+                <button onclick="showModal('Cedea')">Cedea</button>
+                <button onclick="showModal('Champ')">Champ</button>
+                <button onclick="showModal('Chikuwa')">Chikuwa</button>
+                <button onclick="showModal('Del Monte')">Del Monte</button>
+                <button onclick="showModal('Ebi Furai')">Ebi Furai</button>
+                <button onclick="showModal('Fiesta')">Fiesta</button>
+                <button onclick="showModal('Geboy')">Geboy</button>
+                <button onclick="showModal('Joyday')">Joyday</button>
+                <button onclick="showModal('Kanzler')">Kanzler</button>
+                <button onclick="showModal('Kerupuk Udang')">Kerupuk Udang</button>
+                <button onclick="showModal('Korean Odeng')">Korean Odeng</button>
+                <button onclick="showModal('Mamayo')">Mamayo</button>
+                <button onclick="showModal('Minaku')">Minaku</button>
+                <button onclick="showModal('Mini Pao')">Mini Pao</button>
+                <button onclick="showModal('Mitraku')">Mitraku</button>
+                <button onclick="showModal('Mixed Vegetable')">Mixed Vegetable</button>
+                <button onclick="showModal('Muantap')">Muantap</button>
+                <button onclick="showModal('Ngetop')">Ngetop</button>
+                <button onclick="showModal('Palmia')">Palmia</button>
+                <button onclick="showModal('Nala')">Nala</button>
+                <button onclick="showModal('Salam')">Salam</button>
+                <button onclick="showModal('Saos Keju')">Saos Keju</button>
+                <button onclick="showModal('Slice Beef')">Slice Beef</button>
+                <button onclick="showModal('So Eco')">So Eco</button>
+                <button onclick="showModal('So Good')">So Good</button>
+                <button onclick="showModal('Sukoy')">Sukoy</button>
+                <button onclick="showModal('Sunfish')">Sunfish</button>
+                <button onclick="showModal('Wahid')">Wahid</button>
+                <button onclick="showModal('Yona')">Yona</button>
             </div>
         </section>
 
-        <div class="product-modal">
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList"></tbody>
+                </table>
+            </div>
         </div>
 
         <section class="cart-section">
             <div class="cart-header">
-                <h2><i class="fas fa-shopping-basket"></i> Keranjang Belanja</h2>
-                <button class="clear-cart" onclick="clearCart()"><i class="fas fa-trash"></i></button>
+                <h2>🛍 Keranjang Belanja</h2>
+                <button class="clear-btn" onclick="clearCart()">🗑 Kosongkan</button>
+            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="checkout-section">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">Rp 0</span>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="customerName" placeholder="Nama Pelanggan">
+                    <input type="text" id="customerAddress" placeholder="Alamat Pengiriman">
+                </div>
+                <button class="checkout-btn" onclick="processCheckout()">💳 Proses Pesanan</button>
             </div>
         </section>
     </main>
-
-    <div class="tutorial-overlay">
-        <div class="tutorial-card">
-            <button class="close-tutorial" onclick="closeTutorial()">&times;</button>
-        </div>
-    </div>
 
     <div class="notification" id="notification"></div>
 
