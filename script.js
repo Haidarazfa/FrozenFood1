@@ -1,100 +1,231 @@
-const products = {
-    "Ayoma": [
-        { name: "Ayoma Rolade Ayam", price: 21000 },
-        { name: "Ayoma Rolade api", price: 22000 }
-    ],
-    "Bartos": [
-        { name: "Bartos Beef Burger Mini", price: 11500 },
-        { name: "Bartos Nugget", price: 13500 }
-    ],
-    "Bernardi": [
-        { name: "Bernardi Roti Mini", price: 28500 },
-    ],
-    "Bomboe": [
-        { name: "Bomboe Tomyam", price: 7500 },
-    ],
-    "Cedea": [
-        { name: "Cedea Baso Ikan", price: 27000 },
-        { name: "Cedea Bola Salmon", price: 32000 },
-        { name: "Cedea Chikuwa", price: 18000 },
-        { name: "Cedea Crab Stik", price: 17000 },
-        { name: "Cedea Fish Dumpling Cheese", price: 32000 },
-        { name: "Cedea Fish Dumpling Chicken", price: 33000 },
-        { name: "Cedea Fish Roll", price: 26000 },
-        { name: "Cedea Fish Otak - Otak Singapore", price: 30000 },
-        { name: "Cedea Steamboat", price: 26000 },
-        { name: "Cedea Twister", price: 28000 }
-    ],
-    "Champ": [
-        { name: "Champ Chicken Nugget", price: 22000 },
-        { name: "Champ Stik", price: 22000 }
-    ],
-    "Chikuwa": [
-        { name: "Chikuwa Fish Stick", price: 32000 },
-    ],
-    "Del Monte": [
-        { name: "Del Monte Extra Hot 1kg", price: 23000 },
-        { name: "Del Monte Extra Hot 200g", price: 8500 },
-        { name: "Del Monte Saus Tomat 200g", price: 7500 }
-    ],
-    "Ebi Furai": [
-        { name: "Ebi Furai Shrimp", price: 30000 }
-    ],
-    "Fiesta": [
-        { name: "Fiesta Cheese Lover", price: 64000 },
-        { name: "Fiesta Chicken Crunch", price: 30000 },
-        { name: "Fiesta Chicken Wings", price: 64000 },
-        { name: "Fiesta Chicken Karage", price: 55000 },
-        { name: "Fiesta Chicken Shoestring", price: 23000 }
-    ],
-    "Geboy": [
-        { name: "Geboy Sosis Ayam Panjang", price: 19000 },
-    ],
-    "Joyday": [
-        { name: "Joyday Choco Berry", price: 2000 },
-        { name: "Joyday Crunch Choco Lava", price: 6000 },
-        { name: "Joyday Crunch Chocolate Malt", price: 5000 },
-        { name: "Joyday Kokomi", price: 2000 },
-        { name: "Joyday Manggo Smoothies", price: 4000 },
-        { name: "Joyday Mocha Crispy", price: 4500 },
-        { name: "Joyday Mochi Chocolate", price: 3000 },
-        { name: "Joyday Susu Kurma", price: 5000 },
-        { name: "Joyday Vanilla Milkshake", price: 5000 }
-    ],
-    "Kanzler": [
-        { name: "Kanzler Beef Coctail", price: 53000 },
-        { name: "Kanzler Nugget 120g", price: 18000 },
-        { name: "Kanzler Nugget Crispy 450g", price: 43000 },
-        { name: "Kanzler Single Cheese", price: 8500 },
-        { name: "Kanzler Single Cheese Pack", price: 95000 },
-        { name: "Kanzler Sosis Small", price: 30000 },
-        { name: "Kanzler Stik Nugget Crispy", price: 43000 }
-    ],
-    "Kerupuk Udang": [
-        { name: "Kerupuk Udang", price: 16000 }
-    ],
-    "Korean Odeng": [
-        { name: "Korean Odeng", price: 30000 }
-    ],
-    "Mamayo": [
-        { name: "Mamayo Mayonnaise", price: 7500 }
-    ],
-    "Minaku": [
-        { name: "Minaku Kaki Naga", price: 20000 },
-        { name: "Minaku Otak Otak", price: 13000 }
-    ],
-    "Mini Pao": [
-        { name: "Mini Pao Chicken", price: 15000 },
-        { name: "Mini Pao Chocolate", price: 15000 },
-        { name: "Mini Pao Green Bean", price: 15000 },
-        { name: "Mini Pao Beef", price: 15000 }
-    ],
-    "Mitraku": [
-        { name: "Mitraku Shrimp Tail", price: 29000 },
-        { name: "Mitraku Steamboat Tomyam 500g", price: 33000 }
-    ],
-    "Mixed Vegetable": [
-        { name: "Mixed Vegetable", price: 21000 }
-    ],
-    "Muantap": [
-       
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5;
+    color: #2d3436;
+}
+
+header {
+    background-color: #2B3499;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.cart-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.brand-section h2 {
+    margin-bottom: 1.5rem;
+    color: #2B3499;
+}
+
+.brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.brand-grid button {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: #2B3499;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid #2B3499;
+}
+
+.brand-grid button:hover {
+    background-color: #2B3499;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 600px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: #ff4757;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-table button {
+    padding: 0.5rem 1rem;
+    background-color: #2B3499;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cart-section {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: #ff4757;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.cart-items {
+    margin-bottom: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.checkout-section {
+    margin-top: 1.5rem;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.input-group {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2B3499;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: #1a216b;
+}
+
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background-color: #2B3499;
+    color: white;
+    display: none;
+    animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+    .brand-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .modal-content {
+        margin: 1rem;
+    }
+}
