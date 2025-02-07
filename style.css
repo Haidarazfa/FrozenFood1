@@ -90,7 +90,6 @@ h1 {
     from { transform: translateY(-100px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-/* Animasi tambahan */
 button {
     transform: scale(1);
     transition: all 0.2s ease-in-out;
@@ -113,7 +112,6 @@ button:active {
     }
 }
 
-/* Efek hover kartu produk */
 tr {
     transition: all 0.3s ease;
     background: white;
@@ -124,7 +122,6 @@ tr:hover {
     transform: translateX(5px);
 }
 
-/* Pop-up dengan emoticon */
 .popup {
     display: flex;
     align-items: center;
@@ -143,7 +140,6 @@ tr:hover {
     content: '❌';
 }
 
-/* Loading animation */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -171,7 +167,6 @@ tr:hover {
     animation-delay: 0.4s;
 }
 
-/* Tombol lebih menarik */
 .cart-button {
     position: relative;
     overflow: hidden;
