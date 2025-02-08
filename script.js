@@ -295,8 +295,17 @@ function showNotification(message) {
         notification.style.display = 'none';
     }, 3000);
 }
+function closeTutorial() {
+  document.getElementById('tutorialModal').style.display = 'none';
+}
 
-// Close modal saat klik di luar
+window.onclick = function(event) {
+  const productModal = document.getElementById('productModal');
+  if (event.target === productModal) {
+    closeModal();
+  }
+}
+
 window.onclick = function(event) {
     const modal = document.getElementById('productModal');
     if (event.target === modal) {
