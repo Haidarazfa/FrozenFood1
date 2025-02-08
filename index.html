@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barokah Frozen Food</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -20,7 +17,6 @@
       </div>
     </div>
   </header>
-
   <main class="container">
     <section class="brand-section">
       <h2>Pilih Merek Produk</h2>
@@ -60,7 +56,6 @@
         <button data-brand="Yona">Yona</button>
       </div>
     </section>
-
     <div id="tutorialModal" class="modal">
       <div class="modal-content tutorial-content">
         <div class="modal-header">
@@ -82,7 +77,6 @@
         </div>
       </div>
     </div>
-
     <div id="confirmModal" class="modal">
       <div class="modal-content confirm-content">
         <div class="modal-header">
@@ -97,7 +91,6 @@
         </div>
       </div>
     </div>
-
     <div id="productModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -116,7 +109,6 @@
         </table>
       </div>
     </div>
-
     <section class="cart-section">
       <div class="cart-header">
         <h2>🛍 Keranjang Belanja</h2>
@@ -129,22 +121,19 @@
           <span id="subtotal">Rp 0</span>
         </div>
         <div class="input-group">
-          <input type="text" id="customerName" placeholder="Nama Pelanggan" />
-          <input type="text" id="customerAddress" placeholder="Alamat Pengiriman" />
+          <input type="text" id="customerName" placeholder="Nama Pelanggan">
+          <input type="text" id="customerAddress" placeholder="Alamat Pengiriman">
         </div>
         <button class="checkout-btn" onclick="processCheckout()">💳 Proses Pesanan</button>
       </div>
     </section>
   </main>
-
   <div class="notification" id="notification"></div>
-
   <div id="printArea" style="display: none;">
     <h2>Data Pelanggan Barokah Frozen</h2>
     <p>Tanggal: <span id="printDate"></span></p>
     <div id="printContent"></div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
