@@ -107,26 +107,20 @@ const products = {
     { name: "Yona Beef Smoked Patties", price: 29000 }
   ]
 };
-
 let cart = [];
-
 function showModal(modalId) {
   document.getElementById(modalId).style.display = "block";
 }
-
 function closeModal(modalId) {
   document.getElementById(modalId).style.display = "none";
 }
-
 function showProductModal(brand) {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
-
   if (!products[brand] || products[brand].length === 0) {
     showNotification("⚠️ Produk untuk merek ini belum tersedia");
     return;
   }
-  
   products[brand].forEach((product) => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -140,24 +134,19 @@ function showProductModal(brand) {
     `;
     productList.appendChild(row);
   });
-  
   document.getElementById("modalTitle").textContent = brand;
   showModal("productModal");
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   showModal("tutorialModal");
-  
   document.querySelectorAll(".brand-grid button").forEach((button) => {
     button.addEventListener("click", () => {
       const brand = button.dataset.brand;
       showProductModal(brand);
     });
   });
-  
   updateCart();
 });
-
 function addToCart(brand, productName) {
   const product = products[brand].find((p) => p.name === productName);
   if (!product) {
@@ -173,7 +162,6 @@ function addToCart(brand, productName) {
   updateCart();
   showNotification(`🛒 ${productName} ditambahkan ke keranjang`);
 }
-
 function removeFromCart(productName) {
   const itemIndex = cart.findIndex((item) => item.product.name === productName);
   if (itemIndex > -1) {
@@ -186,21 +174,17 @@ function removeFromCart(productName) {
     showNotification(`❌ ${productName} dikurangi dari keranjang`);
   }
 }
-
 function clearCart() {
   cart = [];
   updateCart();
   showNotification("🗑 Keranjang berhasil dikosongkan");
 }
-
 function updateCart() {
   const cartItems = document.getElementById("cartItems");
   const subtotalElement = document.getElementById("subtotal");
   const cartCount = document.getElementById("cartCount");
-  
   cartItems.innerHTML = "";
   let total = 0;
-  
   cart.forEach((item) => {
     const itemElement = document.createElement("div");
     itemElement.className = "cart-item";
@@ -216,11 +200,9 @@ function updateCart() {
     cartItems.appendChild(itemElement);
     total += item.product.price * item.quantity;
   });
-  
   subtotalElement.textContent = `Rp ${total.toLocaleString()}`;
   cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 }
-
 function processCheckout() {
   const name = document.getElementById("customerName").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
@@ -234,14 +216,12 @@ function processCheckout() {
   }
   showConfirmModal(name, address);
 }
-
 function showConfirmModal(name, address) {
   const confirmBody = document.getElementById("confirmBody");
   let content = `
     <h3>Detail Pelanggan</h3>
     <p>Nama: ${name}</p>
     <p>Alamat: ${address}</p>
-    
     <h3>Detail Pesanan</h3>
     <table class="order-table">
       <thead>
@@ -254,7 +234,6 @@ function showConfirmModal(name, address) {
       </thead>
       <tbody>
   `;
-  
   cart.forEach((item) => {
     content += `
       <tr>
@@ -265,37 +244,26 @@ function showConfirmModal(name, address) {
       </tr>
     `;
   });
-  
   const total = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   content += `
       </tbody>
     </table>
     <h4>Total Pesanan: Rp ${total.toLocaleString()}</h4>
-    <p style="font-style: italic; color: #555;">
-      Silakan pilih salah satu opsi di bawah ini untuk melanjutkan: klik "✏️ Edit Pesanan" jika ingin mengubah, "📤 Kirim ke WhatsApp" untuk mengirim pesanan, atau "🖨 Cetak Data" untuk mencetak data pesanan Anda.
+    <p style="font-style: italic; color: #fff;">
+      Pilih salah satu opsi: "✏️ Edit Pesanan" untuk mengubah, "📤 Kirim ke WhatsApp" untuk mengirim pesanan, atau "🖨 Cetak Data" untuk mencetak data pesanan.
     </p>
   `;
-  
   confirmBody.innerHTML = content;
   showModal("confirmModal");
 }
-
 function sendOrder() {
   const name = document.getElementById("customerName").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
-  const message = `Halo Barokah Frozen,\nSaya ingin memesan:\n\n${cart
-    .map((item, index) =>
-      `${index + 1}. ${item.product.name} (${item.quantity} × Rp ${item.product.price.toLocaleString()})`
-    )
-    .join("\n")}\n\nTotal: Rp ${cart
-    .reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-    .toLocaleString()}\n\nNama: ${name}\nAlamat: ${address}`;
-  
+  const message = `Halo Barokah Frozen,\nSaya ingin memesan:\n\n${cart.map((item, index) => `${index + 1}. ${item.product.name} (${item.quantity} × Rp ${item.product.price.toLocaleString()})`).join("\n")}\n\nTotal: Rp ${cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0).toLocaleString()}\n\nNama: ${name}\nAlamat: ${address}`;
   window.open(`https://wa.me/62895322496220?text=${encodeURIComponent(message)}`, "_blank");
   closeModal("confirmModal");
   clearCart();
 }
-
 function printCustomerData() {
   const printArea = document.getElementById("printArea");
   const printContent = document.getElementById("printContent");
@@ -314,7 +282,6 @@ function printCustomerData() {
         <th>Harga Satuan</th>
       </tr>
   `;
-  
   cart.forEach((item, index) => {
     content += `
       <tr>
@@ -325,18 +292,11 @@ function printCustomerData() {
       </tr>
     `;
   });
-  
   content += `</table>`;
   printContent.innerHTML = content;
-  document.getElementById("printDate").textContent = new Date().toLocaleDateString("id-ID", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  });
+  document.getElementById("printDate").textContent = new Date().toLocaleDateString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
   window.print();
 }
-
 function showNotification(message) {
   const notification = document.getElementById("notification");
   notification.textContent = message;
@@ -345,7 +305,6 @@ function showNotification(message) {
     notification.style.display = "none";
   }, 3000);
 }
-
 window.onclick = function (event) {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
