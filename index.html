@@ -99,6 +99,27 @@
   </div>
 </div>
 
+<div id="confirmModal" class="modal">
+  <div class="modal-content confirm-content">
+    <div class="modal-header">
+      <h2>✅ Konfirmasi Pesanan</h2>
+      <span class="close" onclick="closeConfirmModal()">&times;</span>
+    </div>
+    <div id="confirmBody" class="confirm-body"></div>
+    <div class="confirm-actions">
+      <button onclick="closeConfirmModal()">✏️ Edit Pesanan</button>
+      <button onclick="sendOrder()">📤 Kirim ke WhatsApp</button>
+      <button onclick="printCustomerData()">🖨 Cetak Data</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="printArea" style="display: none;">
+  <h2>Data Pelanggan Barokah Frozen</h2>
+  <p>Tanggal: <span id="printDate"></span></p>
+  <div id="printContent"></div>
+</div>
         <section class="cart-section">
             <div class="cart-header">
                 <h2>🛍 Keranjang Belanja</h2>
