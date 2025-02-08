@@ -1,147 +1,152 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barokah Frozen Food</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barokah Frozen Food</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>🍥 Barokah Frozen</h1>
-            <div class="cart-indicator">
-                <span id="cartCount">0</span>
-                <span class="cart-icon">🛒</span>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
-        <section class="brand-section">
-            <h2>Pilih Merek Produk</h2>
-            <div class="brand-grid">
-                <button data-brand="Ayoma">Ayoma</button>
-                <button data-brand="Bartos">Bartos</button>
-                <button data-brand="Bernardi">Bernardi</button>
-                <button data-brand="Bomboe">Bomboe</button>
-                <button data-brand="Cedea">Cedea</button>
-                <button data-brand="Champ">Champ</button>
-                <button data-brand="Chikuwa">Chikuwa</button>
-                <button data-brand="Del Monte">Del Monte</button>
-                <button data-brand="Ebi Furai">Ebi Furai</button>
-                <button data-brand="Fiesta">Fiesta</button>
-                <button data-brand="Geboy">Geboy</button>
-                <button data-brand="Joyday">Joyday</button>
-                <button data-brand="Kanzler">Kanzler</button>
-                <button data-brand="Kerupuk Udang">Kerupuk Udang</button>
-                <button data-brand="Korean Odeng">Korean Odeng</button>
-                <button data-brand="Mamayo">Mamayo</button>
-                <button data-brand="Minaku">Minaku</button>
-                <button data-brand="Mini Pao">Mini Pao</button>
-                <button data-brand="Mitraku">Mitraku</button>
-                <button data-brand="Mixed Vegetable">Mixed Vegetable</button>
-                <button data-brand="Muantap">Muantap</button>
-                <button data-brand="Ngetop">Ngetop</button>
-                <button data-brand="Palmia">Palmia</button>
-                <button data-brand="Nala">Nala</button>
-                <button data-brand="Salam">Salam</button>
-                <button data-brand="Saos Keju">Saos Keju</button>
-                <button data-brand="Slice Beef">Slice Beef</button>
-                <button data-brand="So Eco">So Eco</button>
-                <button data-brand="So Good">So Good</button>
-                <button data-brand="Sukoy">Sukoy</button>
-                <button data-brand="Sunfish">Sunfish</button>
-                <button data-brand="Wahid">Wahid</button>
-                <button data-brand="Yona">Yona</button>
-            </div>
-        </section>
-
-        <div id="productModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="modalTitle"></h2>
-                    <span class="close" onclick="closeModal()">&times;</span>
-                </div>
-                <table class="product-table">
-                    <thead>
-                        <tr>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="productList"></tbody>
-                </table>
-            </div>
-        </div>
-
-<div id="tutorialModal" class="modal" style="display: block;">
-  <div class="modal-content tutorial-content">
-    <div class="modal-header">
-      <h2>📚 Cara Pemesanan</h2>
-      <span class="close" onclick="closeTutorial()">&times;</span>
-    </div>
-    <div class="tutorial-body">
-      <ol class="tutorial-steps">
-        <li>Pilih merek produk dari daftar yang tersedia</li>
-        <li>Klik tombol <strong>"➕ Tambah"</strong> pada produk yang ingin dibeli</li>
-        <li>Atur jumlah pesanan di keranjang belanja dengan tombol <strong>"➖ Kurangi"</strong></li>
-        <li>Isi nama dan alamat lengkap di form bawah keranjang</li>
-        <li>Klik tombol <strong>"💳 Proses Pesanan"</strong> untuk mengirim ke WhatsApp</li>
-      </ol>
-      <div class="tutorial-note">
-        <p>🕒 Pesanan akan diproses dalam 1x24 jam setelah konfirmasi</p>
-        <p>📞 Hubungi 62895322496220 untuk pertanyaan</p>
+  <header>
+    <div class="header-content">
+      <h1>🍥 Barokah Frozen</h1>
+      <div class="cart-indicator">
+        <span id="cartCount">0</span>
+        <span class="cart-icon">🛒</span>
       </div>
     </div>
-  </div>
-</div>
+  </header>
 
-<div id="confirmModal" class="modal">
-  <div class="modal-content confirm-content">
-    <div class="modal-header">
-      <h2>✅ Konfirmasi Pesanan</h2>
-      <span class="close" onclick="closeConfirmModal()">&times;</span>
+  <main class="container">
+    <section class="brand-section">
+      <h2>Pilih Merek Produk</h2>
+      <div class="brand-grid">
+        <button data-brand="Ayoma">Ayoma</button>
+        <button data-brand="Bartos">Bartos</button>
+        <button data-brand="Bernardi">Bernardi</button>
+        <button data-brand="Bomboe">Bomboe</button>
+        <button data-brand="Cedea">Cedea</button>
+        <button data-brand="Champ">Champ</button>
+        <button data-brand="Chikuwa">Chikuwa</button>
+        <button data-brand="Del Monte">Del Monte</button>
+        <button data-brand="Ebi Furai">Ebi Furai</button>
+        <button data-brand="Fiesta">Fiesta</button>
+        <button data-brand="Geboy">Geboy</button>
+        <button data-brand="Joyday">Joyday</button>
+        <button data-brand="Kanzler">Kanzler</button>
+        <button data-brand="Kerupuk Udang">Kerupuk Udang</button>
+        <button data-brand="Korean Odeng">Korean Odeng</button>
+        <button data-brand="Mamayo">Mamayo</button>
+        <button data-brand="Minaku">Minaku</button>
+        <button data-brand="Mini Pao">Mini Pao</button>
+        <button data-brand="Mitraku">Mitraku</button>
+        <button data-brand="Mixed Vegetable">Mixed Vegetable</button>
+        <button data-brand="Muantap">Muantap</button>
+        <button data-brand="Ngetop">Ngetop</button>
+        <button data-brand="Palmia">Palmia</button>
+        <button data-brand="Nala">Nala</button>
+        <button data-brand="Salam">Salam</button>
+        <button data-brand="Saos Keju">Saos Keju</button>
+        <button data-brand="Slice Beef">Slice Beef</button>
+        <button data-brand="So Eco">So Eco</button>
+        <button data-brand="So Good">So Good</button>
+        <button data-brand="Sukoy">Sukoy</button>
+        <button data-brand="Sunfish">Sunfish</button>
+        <button data-brand="Wahid">Wahid</button>
+        <button data-brand="Yona">Yona</button>
+      </div>
+    </section>
+
+    <div id="tutorialModal" class="modal">
+      <div class="modal-content tutorial-content">
+        <div class="modal-header">
+          <h2>📚 Cara Pemesanan</h2>
+          <span class="close" onclick="closeModal('tutorialModal')">&times;</span>
+        </div>
+        <div class="tutorial-body">
+          <ol class="tutorial-steps">
+            <li>Pilih merek produk dari daftar yang tersedia</li>
+            <li>Klik tombol <strong>"➕ Tambah"</strong> pada produk yang ingin dibeli</li>
+            <li>Atur jumlah pesanan di keranjang belanja dengan tombol <strong>"➖ Kurangi"</strong></li>
+            <li>Isi nama dan alamat lengkap di form bawah keranjang</li>
+            <li>
+              Klik tombol <strong>"💳 Proses Pesanan"</strong> untuk mengirim ke WhatsApp
+            </li>
+          </ol>
+          <div class="tutorial-note">
+            <p>🕒 Pesanan akan diproses dalam 1x24 jam setelah konfirmasi</p>
+            <p>📞 Hubungi 62895322496220 untuk pertanyaan</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="confirmBody" class="confirm-body"></div>
-    <div class="confirm-actions">
-      <button onclick="closeConfirmModal()">✏️ Edit Pesanan</button>
-      <button onclick="sendOrder()">📤 Kirim ke WhatsApp</button>
-      <button onclick="printCustomerData()">🖨 Cetak Data</button>
+
+    <div id="confirmModal" class="modal">
+      <div class="modal-content confirm-content">
+        <div class="modal-header">
+          <h2>✅ Konfirmasi Pesanan</h2>
+          <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+        </div>
+        <div id="confirmBody" class="confirm-body"></div>
+        <div class="confirm-actions">
+          <button onclick="closeModal('confirmModal')">✏️ Edit Pesanan</button>
+          <button onclick="sendOrder()">📤 Kirim ke WhatsApp</button>
+          <button onclick="printCustomerData()">🖨 Cetak Data</button>
+        </div>
+      </div>
     </div>
+
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle"></h2>
+          <span class="close" onclick="closeModal('productModal')">&times;</span>
+        </div>
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="productList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <section class="cart-section">
+      <div class="cart-header">
+        <h2>🛍 Keranjang Belanja</h2>
+        <button class="clear-btn" onclick="clearCart()">🗑 Kosongkan</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="checkout-section">
+        <div class="subtotal">
+          <span>Subtotal:</span>
+          <span id="subtotal">Rp 0</span>
+        </div>
+        <div class="input-group">
+          <input type="text" id="customerName" placeholder="Nama Pelanggan" />
+          <input type="text" id="customerAddress" placeholder="Alamat Pengiriman" />
+        </div>
+        <button class="checkout-btn" onclick="processCheckout()">💳 Proses Pesanan</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="notification" id="notification"></div>
+
+  <div id="printArea" style="display: none;">
+    <h2>Data Pelanggan Barokah Frozen</h2>
+    <p>Tanggal: <span id="printDate"></span></p>
+    <div id="printContent"></div>
   </div>
-</div>
 
-
-<div id="printArea" style="display: none;">
-  <h2>Data Pelanggan Barokah Frozen</h2>
-  <p>Tanggal: <span id="printDate"></span></p>
-  <div id="printContent"></div>
-</div>
-        <section class="cart-section">
-            <div class="cart-header">
-                <h2>🛍 Keranjang Belanja</h2>
-                <button class="clear-btn" onclick="clearCart()">🗑 Kosongkan</button>
-            </div>
-            <div class="cart-items" id="cartItems"></div>
-            <div class="checkout-section">
-                <div class="subtotal">
-                    <span>Subtotal:</span>
-                    <span id="subtotal">Rp 0</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="customerName" placeholder="Nama Pelanggan">
-                    <input type="text" id="customerAddress" placeholder="Alamat Pengiriman">
-                </div>
-                <button class="checkout-btn" onclick="processCheckout()">💳 Proses Pesanan</button>
-            </div>
-        </section>
-    </main>
-
-    <div class="notification" id="notification"></div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
