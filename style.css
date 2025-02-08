@@ -8,6 +8,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f5f5f5;
     color: #2d3436;
+    line-height: 1.6;
 }
 
 header {
@@ -32,6 +33,7 @@ header {
     padding: 0.5rem 1rem;
     background-color: rgba(255,255,255,0.1);
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .container {
@@ -43,6 +45,7 @@ header {
 .brand-section h2 {
     margin-bottom: 1.5rem;
     color: #2B3499;
+    font-size: 1.5rem;
 }
 
 .brand-grid {
@@ -54,20 +57,21 @@ header {
 
 .brand-grid button {
     padding: 1rem;
-    border: none;
+    border: 2px solid #2B3499;
     border-radius: 8px;
     background-color: white;
     color: #2B3499;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
-    border: 2px solid #2B3499;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
 }
 
 .brand-grid button:hover {
     background-color: #2B3499;
     color: white;
     transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(43, 52, 153, 0.2);
 }
 
 .modal {
@@ -78,7 +82,8 @@ header {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
-    z-index: 100;
+    z-index: 1000;
+    overflow-y: auto;
 }
 
 .modal-content {
@@ -88,6 +93,12 @@ header {
     border-radius: 12px;
     max-width: 600px;
     position: relative;
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-header {
@@ -95,11 +106,14 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
 .close {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
+    color: #666;
     transition: color 0.2s;
 }
 
@@ -116,7 +130,7 @@ header {
 .product-table td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 .product-table button {
@@ -126,6 +140,11 @@ header {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-table button:hover {
+    background-color: #1a216b;
 }
 
 .cart-section {
@@ -133,6 +152,7 @@ header {
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 2rem;
 }
 
 .cart-header {
@@ -148,6 +168,7 @@ header {
     color: #ff4757;
     cursor: pointer;
     font-size: 1.2rem;
+    padding: 0.5rem;
 }
 
 .cart-items {
@@ -185,6 +206,7 @@ header {
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 100%;
+    font-size: 1rem;
 }
 
 .checkout-btn {
@@ -213,6 +235,7 @@ header {
     color: white;
     display: none;
     animation: slideIn 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 @keyframes slideIn {
@@ -222,10 +245,15 @@ header {
 
 @media (max-width: 768px) {
     .brand-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
     
     .modal-content {
         margin: 1rem;
+        width: 90%;
+    }
+    
+    .header-content {
+        padding: 0 1rem;
     }
 }
