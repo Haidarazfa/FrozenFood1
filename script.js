@@ -249,9 +249,6 @@ function showConfirmModal(name, address) {
       </tbody>
     </table>
     <h4>Total Pesanan: Rp ${total.toLocaleString()}</h4>
-    <p style="font-style: italic; color: #fff;">
-      Pilih salah satu opsi: "✏️ Edit Pesanan" untuk mengubah, "📤 Kirim ke WhatsApp" untuk mengirim pesanan, atau "🖨 Cetak Data" untuk mencetak data pesanan.
-    </p>
   `;
   confirmBody.innerHTML = content;
   showModal("confirmModal");
