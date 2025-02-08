@@ -292,7 +292,9 @@ function printCustomerData() {
   content += `</table>`;
   printContent.innerHTML = content;
   document.getElementById("printDate").textContent = new Date().toLocaleDateString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  printArea.style.display = "block";
   window.print();
+  printArea.style.display = "none";
 }
 function showNotification(message) {
   const notification = document.getElementById("notification");
