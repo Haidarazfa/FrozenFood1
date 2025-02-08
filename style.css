@@ -237,6 +237,56 @@ header {
     animation: slideIn 0.3s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
+#tutorialModal.modal {
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+}
+
+.tutorial-content {
+  max-width: 600px;
+  background: linear-gradient(135deg, #2B3499, #1a216b);
+  color: white;
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.tutorial-steps {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.tutorial-steps li {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.tutorial-steps strong {
+  color: #FFD700;
+}
+
+.tutorial-note {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.tutorial-note p {
+  margin: 0.5rem 0;
+}
+
+#tutorialModal .close {
+  color: white;
+  font-size: 2rem;
+  transition: transform 0.3s;
+}
+
+#tutorialModal .close:hover {
+  color: #ff4757;
+  transform: rotate(90deg);
+}
 
 @keyframes slideIn {
     from { transform: translateX(100%); }
