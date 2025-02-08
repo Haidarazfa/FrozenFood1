@@ -83,6 +83,8 @@ header {
   max-width: 600px;
   border-radius: 10px;
   animation: modalSlide 0.3s ease-out;
+  max-height: 90vh;         /* Batas tinggi maksimal pop out */
+  overflow-y: auto;         /* Jika konten melebihi, tampilkan scrollbar vertikal */
 }
 .modal-content h2,
 .modal-content h3,
