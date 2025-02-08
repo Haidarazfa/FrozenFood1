@@ -1,313 +1,292 @@
+/* Reset dan Style Global */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f5f5f5;
-    color: #2d3436;
-    line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5f5;
+  color: #2d3436;
+  line-height: 1.6;
 }
 
 header {
-    background-color: #2B3499;
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #2B3499;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 }
 
 .cart-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 50px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .brand-section h2 {
-    margin-bottom: 1.5rem;
-    color: #2B3499;
-    font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #2B3499;
+  font-size: 1.5rem;
 }
 
 .brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .brand-grid button {
-    padding: 1rem;
-    border: 2px solid #2B3499;
-    border-radius: 8px;
-    background-color: white;
-    color: #2B3499;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
+  padding: 1rem;
+  border: 2px solid #2B3499;
+  border-radius: 8px;
+  background-color: white;
+  color: #2B3499;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
 }
 
 .brand-grid button:hover {
-    background-color: #2B3499;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(43, 52, 153, 0.2);
+  background-color: #2B3499;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(43, 52, 153, 0.2);
 }
 
+/* Modal Base */
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1000;
-    overflow-y: auto;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .modal-content {
-    background-color: white;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border-radius: 12px;
-    max-width: 600px;
-    position: relative;
-    animation: modalSlide 0.3s ease-out;
-}
-
-@keyframes modalSlide {
-    from { transform: translateY(-20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  position: relative;
+  background-color: white;
+  margin: 2% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  animation: modalSlide 0.3s ease-out;
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .close {
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.2s;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .close:hover {
-    color: #ff4757;
-}
-
-.product-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.product-table th,
-.product-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-.product-table button {
-    padding: 0.5rem 1rem;
-    background-color: #2B3499;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.product-table button:hover {
-    background-color: #1a216b;
-}
-
-.cart-section {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-top: 2rem;
-}
-
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.clear-btn {
-    background: none;
-    border: none;
-    color: #ff4757;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-}
-
-.cart-items {
-    margin-bottom: 1.5rem;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.checkout-section {
-    margin-top: 1.5rem;
-}
-
-.subtotal {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.input-group {
-    display: grid;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.input-group input {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%;
-    font-size: 1rem;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: #2B3499;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.checkout-btn:hover {
-    background-color: #1a216b;
-}
-
-.notification {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    background-color: #2B3499;
-    color: white;
-    display: none;
-    animation: slideIn 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-#tutorialModal.modal {
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 2000;
-}
-
-.tutorial-content {
-  max-width: 600px;
-  background: linear-gradient(135deg, #2B3499, #1a216b);
-  color: white;
-  padding: 2rem;
-  border-radius: 15px;
-}
-
-.tutorial-steps {
-  margin: 1.5rem 0;
-  padding-left: 1.5rem;
-}
-
-.tutorial-steps li {
-  margin: 1rem 0;
-  padding-left: 1rem;
-  line-height: 1.6;
-  font-size: 1.1rem;
-}
-
-.tutorial-steps strong {
-  color: #FFD700;
-}
-
-.tutorial-note {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-top: 1.5rem;
-}
-
-.tutorial-note p {
-  margin: 0.5rem 0;
-}
-
-#tutorialModal .close {
-  color: white;
-  font-size: 2rem;
-  transition: transform 0.3s;
-}
-
-#tutorialModal .close:hover {
   color: #ff4757;
   transform: rotate(90deg);
 }
 
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
+@keyframes modalSlide {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-@media (max-width: 768px) {
-    .brand-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
-    
-    .modal-content {
-        margin: 1rem;
-        width: 90%;
-    }
-    
-    .header-content {
-        padding: 0 1rem;
-    }
+/* Tutorial Modal Khusus */
+#tutorialModal .modal-content {
+  background: linear-gradient(135deg, #2B3499, #1a216b);
+  color: white;
 }
-/* Konfirmasi Modal */
+
+#tutorialModal .close {
+  color: white;
+}
+
+/* Style Tabel Produk */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.product-table button {
+  padding: 0.5rem 1rem;
+  background-color: #2B3499;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.product-table button:hover {
+  background-color: #1a216b;
+}
+
+/* Keranjang Belanja */
+.cart-section {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #ff4757;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.cart-items {
+  margin-bottom: 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout-section {
+  margin-top: 1.5rem;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.input-group {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #2B3499;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkout-btn:hover {
+  background-color: #1a216b;
+}
+
+/* Notifikasi */
+.notification {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  background-color: #2B3499;
+  color: white;
+  display: none;
+  animation: slideIn 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+  .brand-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .modal-content {
+    margin: 1rem;
+    width: 90%;
+  }
+
+  .header-content {
+    padding: 0 1rem;
+  }
+}
+
+/* Konfirmasi Modal Khusus */
 .confirm-content {
   max-width: 700px;
   background: #fff;
@@ -351,15 +330,15 @@ header {
   color: white;
 }
 
+/* Style untuk area cetak */
 @media print {
   body * {
     visibility: hidden;
   }
-  
-  #printArea, #printArea * {
+  #printArea,
+  #printArea * {
     visibility: visible;
   }
-  
   #printArea {
     position: absolute;
     left: 0;
@@ -368,19 +347,17 @@ header {
     padding: 20px;
     font-size: 14px;
   }
-  
   #printArea h2 {
     color: #000;
     margin-bottom: 15px;
   }
-  
   #printContent table {
     width: 100%;
     border-collapse: collapse;
     margin: 10px 0;
   }
-  
-  #printContent td, #printContent th {
+  #printContent td,
+  #printContent th {
     border: 1px solid #ddd;
     padding: 8px;
   }
