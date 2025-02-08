@@ -263,52 +263,121 @@ function updateCart() {
 }
 
 function processCheckout() {
-    const name = document.getElementById('customerName').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    
-    if (!name || !address) {
-        showNotification('⚠️ Harap isi nama dan alamat lengkap');
-        return;
-    }
-    
-    if (cart.length === 0) {
-        showNotification('⚠️ Keranjang belanja masih kosong');
-        return;
-    }
-    
-    const orderDetails = `Pesanan dari: ${name}\nAlamat: ${address}\n\nDaftar Belanja:\n${
-        cart.map((item, index) => 
-            `${index + 1}. ${item.product.name} (${item.quantity} × Rp ${item.product.price.toLocaleString()})`
-        ).join('\n')
-    }\n\nTotal: Rp ${cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0).toLocaleString()}`;
-    
-    window.open(`https://wa.me/62895322496220?text=${encodeURIComponent(orderDetails)}`, '_blank');
-    clearCart();
-}
-
-function showNotification(message) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.style.display = 'block';
-    
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 3000);
-}
-function closeTutorial() {
-  document.getElementById('tutorialModal').style.display = 'none';
-}
-
-window.onclick = function(event) {
-  const productModal = document.getElementById('productModal');
-  if (event.target === productModal) {
-    closeModal();
+  const name = document.getElementById('customerName').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  
+  if (!name || !address) {
+    showNotification('⚠️ Harap isi nama dan alamat lengkap');
+    return;
   }
+  
+  if (cart.length === 0) {
+    showNotification('⚠️ Keranjang belanja masih kosong');
+    return;
+  }
+  
+  showConfirmModal(name, address);
 }
 
-window.onclick = function(event) {
-    const modal = document.getElementById('productModal');
-    if (event.target === modal) {
-        closeModal();
-    }
+function showConfirmModal(name, address) {
+  const confirmBody = document.getElementById('confirmBody');
+  const modal = document.getElementById('confirmModal');
+  
+  let content = `
+    <h3>Detail Pelanggan</h3>
+    <p>Nama: ${name}</p>
+    <p>Alamat: ${address}</p>
+    
+    <h3>Detail Pesanan</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Produk</th>
+          <th>Qty</th>
+          <th>Harga</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>`;
+  
+  cart.forEach(item => {
+    content += `
+      <tr>
+        <td>${item.product.name}</td>
+        <td>${item.quantity}</td>
+        <td>Rp ${item.product.price.toLocaleString()}</td>
+        <td>Rp ${(item.product.price * item.quantity).toLocaleString()}</td>
+      </tr>`;
+  });
+  
+  const total = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  
+  content += `
+      </tbody>
+    </table>
+    <h4>Total Pesanan: Rp ${total.toLocaleString()}</h4>`;
+  
+  confirmBody.innerHTML = content;
+  modal.style.display = 'block';
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').style.display = 'none';
+}
+
+function sendOrder() {
+  const name = document.getElementById('customerName').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  const message = `Halo Barokah Frozen,\nSaya ingin memesan:\n\n${
+    cart.map((item, index) => 
+      `${index + 1}. ${item.product.name} (${item.quantity} × Rp ${item.product.price.toLocaleString()})`
+    ).join('\n')
+  }\n\nTotal: Rp ${cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0).toLocaleString()}\n\nNama: ${name}\nAlamat: ${address}`;
+  
+  window.open(`https://wa.me/62895322496220?text=${encodeURIComponent(message)}`, '_blank');
+  closeConfirmModal();
+  clearCart();
+}
+
+function printCustomerData() {
+  const printArea = document.getElementById('printArea');
+  const printContent = document.getElementById('printContent');
+  const name = document.getElementById('customerName').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  
+  let content = `
+    <h3>Data Pelanggan</h3>
+    <p>Nama: ${name}</p>
+    <p>Alamat: ${address}</p>
+    
+    <h3>Daftar Belanja</h3>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Harga Satuan</th>
+      </tr>`;
+  
+  cart.forEach((item, index) => {
+    content += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${item.product.name}</td>
+        <td>${item.quantity}</td>
+        <td>Rp ${item.product.price.toLocaleString()}</td>
+      </tr>`;
+  });
+  
+  content += `</table>`;
+  
+  printContent.innerHTML = content;
+  printArea.querySelector('#printDate').textContent = new Date().toLocaleDateString('id-ID', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  
+  window.print();
 }
