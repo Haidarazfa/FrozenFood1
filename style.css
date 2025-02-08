@@ -307,3 +307,81 @@ header {
         padding: 0 1rem;
     }
 }
+/* Konfirmasi Modal */
+.confirm-content {
+  max-width: 700px;
+  background: #fff;
+  color: #333;
+}
+
+.confirm-body {
+  padding: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  justify-content: flex-end;
+}
+
+.confirm-actions button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.confirm-actions button:nth-child(1) {
+  background: #f1f1f1;
+  color: #333;
+}
+
+.confirm-actions button:nth-child(2) {
+  background: #25D366;
+  color: white;
+}
+
+.confirm-actions button:nth-child(3) {
+  background: #2B3499;
+  color: white;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #printArea, #printArea * {
+    visibility: visible;
+  }
+  
+  #printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    font-size: 14px;
+  }
+  
+  #printArea h2 {
+    color: #000;
+    margin-bottom: 15px;
+  }
+  
+  #printContent table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+  }
+  
+  #printContent td, #printContent th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+}
