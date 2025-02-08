@@ -1,4 +1,3 @@
-/* Reset dan Style Global */
 * {
   margin: 0;
   padding: 0;
@@ -75,7 +74,6 @@ header {
   box-shadow: 0 2px 8px rgba(43, 52, 153, 0.2);
 }
 
-/* Modal Base */
 .modal {
   display: none;
   position: fixed;
@@ -91,11 +89,23 @@ header {
   position: relative;
   background-color: white;
   margin: 2% auto;
-  padding: 20px;
+  padding: 30px; 
   width: 80%;
   max-width: 600px;
   border-radius: 10px;
   animation: modalSlide 0.3s ease-out;
+}
+
+.modal-content h2,
+.modal-content h3,
+.modal-content p,
+.modal-content li {
+  margin-bottom: 15px; 
+}
+
+.tutorial-body,
+.confirm-body {
+  padding: 10px 0;
 }
 
 .modal-header {
@@ -131,7 +141,6 @@ header {
   }
 }
 
-/* Tutorial Modal Khusus */
 #tutorialModal .modal-content {
   background: linear-gradient(135deg, #2B3499, #1a216b);
   color: white;
@@ -141,7 +150,6 @@ header {
   color: white;
 }
 
-/* Style Tabel Produk */
 .product-table {
   width: 100%;
   border-collapse: collapse;
@@ -168,7 +176,6 @@ header {
   background-color: #1a216b;
 }
 
-/* Keranjang Belanja */
 .cart-section {
   background-color: white;
   padding: 1.5rem;
@@ -247,7 +254,6 @@ header {
   background-color: #1a216b;
 }
 
-/* Notifikasi */
 .notification {
   position: fixed;
   bottom: 2rem;
@@ -270,23 +276,19 @@ header {
   }
 }
 
-/* Media Query */
 @media (max-width: 768px) {
   .brand-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
-
   .modal-content {
     margin: 1rem;
     width: 90%;
   }
-
   .header-content {
     padding: 0 1rem;
   }
 }
 
-/* Konfirmasi Modal Khusus */
 .confirm-content {
   max-width: 700px;
   background: #fff;
@@ -330,7 +332,7 @@ header {
   color: white;
 }
 
-/* Style untuk area cetak */
+/* Print Area */
 @media print {
   body * {
     visibility: hidden;
