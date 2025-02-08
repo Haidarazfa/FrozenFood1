@@ -13,7 +13,7 @@
             <h1>🍥 Barokah Frozen</h1>
             <div class="cart-indicator">
                 <span id="cartCount">0</span>
-                <i class="cart-icon">🛒</i>
+                <span class="cart-icon">🛒</span>
             </div>
         </div>
     </header>
@@ -22,62 +22,60 @@
         <section class="brand-section">
             <h2>Pilih Merek Produk</h2>
             <div class="brand-grid">
-                <button onclick="showModal('Ayoma')">Ayoma</button>
-                <button onclick="showModal('Bartos')">Bartos</button>
-                <button onclick="showModal('Bernardi')">Bernardi</button>
-                <button onclick="showModal('Bomboe')">Bomboe</button>
-                <button onclick="showModal('Cedea')">Cedea</button>
-                <button onclick="showModal('Champ')">Champ</button>
-                <button onclick="showModal('Chikuwa')">Chikuwa</button>
-                <button onclick="showModal('Del Monte')">Del Monte</button>
-                <button onclick="showModal('Ebi Furai')">Ebi Furai</button>
-                <button onclick="showModal('Fiesta')">Fiesta</button>
-                <button onclick="showModal('Geboy')">Geboy</button>
-                <button onclick="showModal('Joyday')">Joyday</button>
-                <button onclick="showModal('Kanzler')">Kanzler</button>
-                <button onclick="showModal('Kerupuk Udang')">Kerupuk Udang</button>
-                <button onclick="showModal('Korean Odeng')">Korean Odeng</button>
-                <button onclick="showModal('Mamayo')">Mamayo</button>
-                <button onclick="showModal('Minaku')">Minaku</button>
-                <button onclick="showModal('Mini Pao')">Mini Pao</button>
-                <button onclick="showModal('Mitraku')">Mitraku</button>
-                <button onclick="showModal('Mixed Vegetable')">Mixed Vegetable</button>
-                <button onclick="showModal('Muantap')">Muantap</button>
-                <button onclick="showModal('Ngetop')">Ngetop</button>
-                <button onclick="showModal('Palmia')">Palmia</button>
-                <button onclick="showModal('Nala')">Nala</button>
-                <button onclick="showModal('Salam')">Salam</button>
-                <button onclick="showModal('Saos Keju')">Saos Keju</button>
-                <button onclick="showModal('Slice Beef')">Slice Beef</button>
-                <button onclick="showModal('So Eco')">So Eco</button>
-                <button onclick="showModal('So Good')">So Good</button>
-                <button onclick="showModal('Sukoy')">Sukoy</button>
-                <button onclick="showModal('Sunfish')">Sunfish</button>
-                <button onclick="showModal('Wahid')">Wahid</button>
-                <button onclick="showModal('Yona')">Yona</button>
+                <button data-brand="Ayoma">Ayoma</button>
+                <button data-brand="Bartos">Bartos</button>
+                <button data-brand="Bernardi">Bernardi</button>
+                <button data-brand="Bomboe">Bomboe</button>
+                <button data-brand="Cedea">Cedea</button>
+                <button data-brand="Champ">Champ</button>
+                <button data-brand="Chikuwa">Chikuwa</button>
+                <button data-brand="Del Monte">Del Monte</button>
+                <button data-brand="Ebi Furai">Ebi Furai</button>
+                <button data-brand="Fiesta">Fiesta</button>
+                <button data-brand="Geboy">Geboy</button>
+                <button data-brand="Joyday">Joyday</button>
+                <button data-brand="Kanzler">Kanzler</button>
+                <button data-brand="Kerupuk Udang">Kerupuk Udang</button>
+                <button data-brand="Korean Odeng">Korean Odeng</button>
+                <button data-brand="Mamayo">Mamayo</button>
+                <button data-brand="Minaku">Minaku</button>
+                <button data-brand="Mini Pao">Mini Pao</button>
+                <button data-brand="Mitraku">Mitraku</button>
+                <button data-brand="Mixed Vegetable">Mixed Vegetable</button>
+                <button data-brand="Muantap">Muantap</button>
+                <button data-brand="Ngetop">Ngetop</button>
+                <button data-brand="Palmia">Palmia</button>
+                <button data-brand="Nala">Nala</button>
+                <button data-brand="Salam">Salam</button>
+                <button data-brand="Saos Keju">Saos Keju</button>
+                <button data-brand="Slice Beef">Slice Beef</button>
+                <button data-brand="So Eco">So Eco</button>
+                <button data-brand="So Good">So Good</button>
+                <button data-brand="Sukoy">Sukoy</button>
+                <button data-brand="Sunfish">Sunfish</button>
+                <button data-brand="Wahid">Wahid</button>
+                <button data-brand="Yona">Yona</button>
             </div>
         </section>
 
-<div id="productModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 id="modalTitle"></h2>
-            <span class="close" onclick="closeModal()">&times;</span>
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList"></tbody>
+                </table>
+            </div>
         </div>
-        <div class="modal-body">
-            <table class="product-table">
-                <thead>
-                    <tr>
-                        <th>Produk</th>
-                        <th>Harga</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="productList"></tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
         <section class="cart-section">
             <div class="cart-header">
@@ -102,7 +100,5 @@
     <div class="notification" id="notification"></div>
 
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.3.1/html-docx.js"></script>
-    
 </body>
 </html>
