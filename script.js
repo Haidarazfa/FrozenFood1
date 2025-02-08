@@ -1,231 +1,156 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+let cart = [];
+let productsData = {}; 
+
+const productDatabase = {
+    'Ayoma': [
+        {name: 'Ayam Goreng', price: 25000},
+        {name: 'Nugget Ayam', price: 18000}
+    ],
+    'Bartos': [
+        {name: 'Sosis Bratwurst', price: 35000},
+        {name: 'Smoked Beef', price: 28000}
+    ],
+};
+
+function showNotification(message, duration = 3000) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+    setTimeout(() => notification.style.display = 'none', duration);
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f5f5f5;
-    color: #2d3436;
+function updateCartDisplay() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const subtotal = document.getElementById('subtotal');
+    
+    cartItems.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+            <span>${item.name} (${item.quantity})</span>
+            <span>Rp ${(item.price * item.quantity).toLocaleString()}</span>
+            <button onclick="removeFromCart(${index})">✖</button>
+        `;
+        cartItems.appendChild(itemElement);
+    });
+    
+    cartCount.textContent = cart.length;
+    subtotal.textContent = `Rp ${total.toLocaleString()}`;
 }
 
-header {
-    background-color: #2B3499;
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+function addToCart(productName, price) {
+    const existingItem = cart.find(item => item.name === productName);
+    if(existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({name: productName, price: price, quantity: 1});
+    }
+    updateCartDisplay();
+    showNotification('Produk ditambahkan ke keranjang!');
 }
 
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
 }
 
-.cart-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 50px;
+function clearCart() {
+    cart = [];
+    updateCartDisplay();
+    showNotification('Keranjang dikosongkan!');
 }
 
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+function showModal(brand) {
+    const modal = document.getElementById('productModal');
+    const productList = document.getElementById('productList');
+    document.getElementById('modalTitle').textContent = brand;
+    
+    productList.innerHTML = '';
+    
+    productDatabase[brand].forEach(product => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td>Rp ${product.price.toLocaleString()}</td>
+            <td>
+                <button onclick="addToCart('${product.name}', ${product.price})">
+                    Tambah
+                </button>
+            </td>
+        `;
+        productList.appendChild(row);
+    });
+    
+    modal.style.display = 'block';
 }
 
-.brand-section h2 {
-    margin-bottom: 1.5rem;
-    color: #2B3499;
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
 }
 
-.brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+function generateInvoiceContent() {
+    const customerName = document.getElementById('customerName').value;
+    const customerAddress = document.getElementById('customerAddress').value;
+    
+    return `
+        <h1>Barokah Frozen Food</h1>
+        <h2>Invoice Pembelian</h2>
+        <p>Nama: ${customerName}</p>
+        <p>Alamat: ${customerAddress}</p>
+        <h3>Daftar Belanja:</h3>
+        <ul>
+            ${cart.map(item => `
+                <li>${item.name} (${item.quantity}) - Rp ${(item.price * item.quantity).toLocaleString()}</li>
+            `).join('')}
+        </ul>
+        <h3>Total: ${document.getElementById('subtotal').textContent}</h3>
+        <p>Terima kasih telah berbelanja!</p>
+    `;
 }
 
-.brand-grid button {
-    padding: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: white;
-    color: #2B3499;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 2px solid #2B3499;
-}
-
-.brand-grid button:hover {
-    background-color: #2B3499;
-    color: white;
-    transform: translateY(-2px);
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 100;
-}
-
-.modal-content {
-    background-color: white;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border-radius: 12px;
-    max-width: 600px;
-    position: relative;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.close {
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close:hover {
-    color: #ff4757;
-}
-
-.product-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.product-table th,
-.product-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.product-table button {
-    padding: 0.5rem 1rem;
-    background-color: #2B3499;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.cart-section {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.clear-btn {
-    background: none;
-    border: none;
-    color: #ff4757;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.cart-items {
-    margin-bottom: 1.5rem;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.checkout-section {
-    margin-top: 1.5rem;
-}
-
-.subtotal {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.input-group {
-    display: grid;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.input-group input {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: #2B3499;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.checkout-btn:hover {
-    background-color: #1a216b;
-}
-
-.notification {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    background-color: #2B3499;
-    color: white;
-    display: none;
-    animation: slideIn 0.3s;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
-
-@media (max-width: 768px) {
-    .brand-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+function processCheckout() {
+    if(cart.length === 0) {
+        showNotification('Keranjang kosong! Tambahkan produk terlebih dahulu');
+        return;
     }
     
-    .modal-content {
-        margin: 1rem;
+    const invoiceContent = generateInvoiceContent();
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Invoice Barokah Frozen Food</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px }
+                    h1 { color: #2B3499; }
+                    ul { list-style: none; padding: 0 }
+                    li { margin: 10px 0 }
+                </style>
+            </head>
+            <body>
+                ${invoiceContent}
+                <script>
+                    window.print();
+                    window.onafterprint = function() {
+                        window.close();
+                    }
+                <\/script>
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+    
+    clearCart();
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if(event.target === modal) {
+        modal.style.display = 'none';
     }
 }
